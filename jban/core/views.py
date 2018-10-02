@@ -1,16 +1,17 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 from core.models import Build
-
-
-# TODO use DRF Luke
-def main(request, pk=None):
-    build = get_object_or_404(Build, id=pk)
-    return JsonResponse({"char_skills": build.skills,
-                         "runes": build.runes,
-                         "class": build.default_class})
+from core.serializers import BuildSerializer
 
 
 def get_self(request):
     return JsonResponse({"username": "Хзкто"})
+
+
+class BuildViewSet(ModelViewSet):
+    serializer_class = BuildSerializer
+    queryset = Build.objects.all()

@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -58,12 +58,28 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     )
 }
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:8080',
+)
+
+CSRF_COOKIE_SECURE = True
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'X-XSRF-TOKEN',
+    'x-xsrf-token',
+    'x-requested-with',
 )
 
 CORS_ALLOW_CREDENTIALS = True
@@ -124,6 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'core.User'
 
+REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER': 'core.serializers.UserDetailsSerializer'}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

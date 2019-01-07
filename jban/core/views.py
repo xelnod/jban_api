@@ -10,15 +10,6 @@ from core.models import Build
 from core.serializers import BuildSerializer
 
 
-def get_self(request):
-    user = request.user
-    if user.is_authenticated:
-        return JsonResponse({"username": user.username, "class": user.preferred_class})
-    else:
-        username = 'ХЗ кто'
-    return JsonResponse({"username": username, "class": 'swordman'})
-
-
 class BuildViewSet(ModelViewSet):
     serializer_class = BuildSerializer
     queryset = Build.objects.all()

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from core.views import BuildViewSet
+from core.views import BuildViewSet, RegisterView
 from rest_framework.routers import SimpleRouter
 
 router = SimpleRouter()
@@ -11,4 +11,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('rest-auth/', include('rest_auth.urls')),
+    path('register/', RegisterView.as_view()),
 ]

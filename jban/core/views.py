@@ -11,11 +11,12 @@ from core.serializers import BuildSerializer
 
 
 def get_self(request):
-    if request.user.is_authenticated:
-        username = request.user.username
+    user = request.user
+    if user.is_authenticated:
+        return JsonResponse({"username": user.username, "class": user.preferred_class})
     else:
         username = 'ХЗ кто'
-    return JsonResponse({"username": username})
+    return JsonResponse({"username": username, "class": 'swordman'})
 
 
 class BuildViewSet(ModelViewSet):

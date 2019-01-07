@@ -1,3 +1,4 @@
 psycopg2
 django_extensions
 django_rest_framework
+django_rest_auth
